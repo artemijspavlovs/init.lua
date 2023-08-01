@@ -14,6 +14,6 @@ require("art.plugins.treesitter")
 
 -- keymaps
 -- file browsing
-require("art.keymaps.harpoon")
-require("art.keymaps.telescope")
+require("art.keymaps.harpoon") -- commonly used file cache
+require("art.keymaps.telescope") -- search for files and strings
 
