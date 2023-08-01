@@ -9,6 +9,9 @@ require("art.options.core")
 
 
 
+-- syntax highlighting
+require("art.plugins.treesitter")
+
 -- keymaps
 -- file browsing
 require("art.keymaps.harpoon")
