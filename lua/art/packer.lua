@@ -33,6 +33,13 @@ return packer.startup(function(use)
 	-- generic dependencies
 	use({ "nvim-lua/plenary.nvim" })
 
+	-- colorscheme
+	use({
+		"EdenEast/nightfox.nvim",
+		config = function()
+			vim.cmd("colorscheme carbonfox")
+		end,
+	})
 
     -- file browsing
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" }) -- dependency for better sorting performance
