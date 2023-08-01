@@ -7,3 +7,10 @@ require("art.packer")
 require("art.keymaps.core")
 require("art.options.core")
 
+
+
+-- keymaps
+-- file browsing
+require("art.keymaps.harpoon")
+require("art.keymaps.telescope")
+
