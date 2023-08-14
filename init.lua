@@ -1,19 +1,21 @@
 print("artpav.dev")
 
--- package manager
 require("art.packer")
-
--- must haves
 require("art.keymaps.core")
 require("art.options.core")
 
+require("art.plugins.ui") -- package manager
+require("art.plugins.file-browsing") -- telescope, harpoon
+require("art.plugins.syntax-highlighting") -- treesitter
+require("art.plugins.quality-of-life") -- additional plugin configuration
 
+require("art.plugins.lsp") -- mason, mason-lspconfig
+require("art.plugins.lsp.go")
+require("art.plugins.lsp.rust")
+require("art.plugins.lsp.lua")
+require("art.plugins.lsp.devops")
 
--- syntax highlighting
-require("art.plugins.treesitter")
+-- require("art.plugins.lsp.web")
 
--- keymaps
--- file browsing
-require("art.keymaps.harpoon") -- commonly used file cache
-require("art.keymaps.telescope") -- search for files and strings
-
+require("art.plugins.formatting") -- null-ls, mason-null-ls
+require("art.plugins.autocompletion") -- cmp, luasnip, lspkind

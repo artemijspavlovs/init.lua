@@ -4,6 +4,9 @@ if not treesitter_status then
 	return
 end
 
+-- -----
+-- config
+-- -----
 treesitter.setup({
 	highlight = {
 		enable = true,
@@ -27,29 +30,39 @@ treesitter.setup({
 		enable = true,
 		disable = {},
 	},
+
 	-- A list of parser names, or 'all' (the five listed parsers should always be installed)
 	ensure_installed = {
+		-- web
 		"typescript",
 		"javascript",
 		"tsx",
 		"html",
 		"css",
 
+		-- rust
 		"rust",
 
+		-- lua
 		"lua",
 
+		-- vim
 		"vim",
 		"vimdoc",
 		"query",
-        
+
+		-- go
 		"go",
 		"gomod",
 		"gosum",
 
+		-- markdown
 		"markdown",
 		"markdown_inline",
+
+		-- hashicorp
 		"hcl",
+		"terraform",
 	},
 
 	rainbow = {
@@ -65,4 +78,3 @@ treesitter.setup({
 	-- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
 	auto_install = true,
 })
-
