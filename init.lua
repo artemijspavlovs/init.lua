@@ -14,8 +14,7 @@ require("art.plugins.lsp.go")
 require("art.plugins.lsp.rust")
 require("art.plugins.lsp.lua")
 require("art.plugins.lsp.devops")
-
--- require("art.plugins.lsp.web")
+require("art.plugins.lsp.web")
 
 require("art.plugins.formatting") -- null-ls, mason-null-ls
 require("art.plugins.autocompletion") -- cmp, luasnip, lspkind

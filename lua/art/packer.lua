@@ -57,6 +57,7 @@ return packer.startup(function(use)
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" }) -- dependency for better sorting performance
 	use({ "nvim-telescope/telescope.nvim", branch = "0.1.x" }) -- fuzzy finder
 	use({ "theprimeagen/harpoon" })
+	use({ "kovetskiy/neovim-move" })
 
 	-- -------
 	-- plugins/syntax-highlight.lua
@@ -91,7 +92,11 @@ return packer.startup(function(use)
 	-- -------
 	use({
 		"ray-x/guihua.lua",
+		config = function()
+			require("guihua").setup()
+		end,
 	})
+
 	use({
 		"ray-x/go.nvim",
 		tf = { "go", "gomod" },
@@ -209,6 +214,8 @@ return packer.startup(function(use)
 		},
 	})
 
+	-- use({ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} })
+
 	use({
 		"windwp/nvim-autopairs",
 		config = function()
@@ -226,6 +233,13 @@ return packer.startup(function(use)
 	use({
 		"weilbith/nvim-code-action-menu",
 		cmd = "CodeActionMenu",
+	})
+
+	use({
+		"lewis6991/gitsigns.nvim",
+		config = function()
+			require("gitsigns").setup()
+		end,
 	})
 
 	-- best git client in the universe

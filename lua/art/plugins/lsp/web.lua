@@ -18,7 +18,24 @@ end
 
 local typescript_capabilities = cmp_nvim_lsp.default_capabilities()
 local typescript_on_attach = function(_, bufnr)
+	local opts = { buffer = bufnr }
 	print("hello typescript!")
+	-- lsp bindings
+	vim.keymap.set("n", "<leader>lgdf", vim.lsp.buf.definition, opts)
+	vim.keymap.set("n", "<leader>lgdc", vim.lsp.buf.declaration, opts)
+	vim.keymap.set("n", "<leader>lgi", vim.lsp.buf.implementation, opts)
+	vim.keymap.set("n", "<leader>lgr", vim.lsp.buf.references, opts)
+	vim.keymap.set("n", "<leader>lca", vim.lsp.buf.code_action, opts)
+
+	-- vim diagnostics
+	vim.keymap.set("n", "<leader>lof", vim.diagnostic.open_float, opts)
+	vim.keymap.set("n", "<leader>lsh", vim.lsp.buf.signature_help, opts)
+
+	-- typescript tools bindings
+	vim.keymap.set("n", "<leader>tsoi", ":TSToolsOrganizeImports<CR>", opts)
+	vim.keymap.set("n", "<leader>tsami", ":TSToolsAddMissingImports<CR>", opts)
+	vim.keymap.set("n", "<leader>tsfa", ":TSToolsFixAll<CR>", opts)
+	vim.keymap.set("n", "<leader>tsru", ":TSToolsRemoveUnused<CR>", opts)
 end
 
 cmp.setup.filetype({ "rust", "typescript", "typescriptreact", "javascript", "javascriptreact" }, {
@@ -33,4 +50,11 @@ cmp.setup.filetype({ "rust", "typescript", "typescriptreact", "javascript", "jav
 	}),
 })
 
-typescript_tools.setup({})
+typescript_tools.setup({
+	on_attach = typescript_on_attach,
+	capabilities = typescript_capabilities,
+
+	settings = {
+		separate_diagnostic_server = true,
+	},
+})

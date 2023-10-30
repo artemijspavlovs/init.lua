@@ -17,6 +17,13 @@ if not cmp_status then
 	return
 end
 
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+	pattern = { "*.rs" },
+	callback = function()
+		vim.lsp.buf.format()
+	end,
+})
+
 cmp.setup.filetype("rust", {
 	sources = cmp.config.sources({
 		{ name = "luasnip" }, -- snipped engine
@@ -31,17 +38,29 @@ cmp.setup.filetype("rust", {
 
 local rust_capabilities = cmp_nvim_lsp.default_capabilities()
 local rust_on_attach = function(_, bufnr)
-	print("hello rust!")
-	vim.keymap.set("n", "<C-.>", rust_tools.hover_actions.hover_actions, { buffer = bufnr })
+	local opts = { buffer = bufnr }
+	-- lsp bindings
+	vim.keymap.set("n", "<leader>lgdf", vim.lsp.buf.definition, opts)
+	vim.keymap.set("n", "<leader>lgdc", vim.lsp.buf.declaration, opts)
+	vim.keymap.set("n", "<leader>lgi", vim.lsp.buf.implementation, opts)
+	vim.keymap.set("n", "<leader>lgr", vim.lsp.buf.references, opts)
+	vim.keymap.set("n", "<leader>lca", vim.lsp.buf.code_action, opts)
+	-- vim diagnostics
+	vim.keymap.set("n", "<leader>lof", vim.diagnostic.open_float, opts)
+	vim.keymap.set("n", "<leader>lsh", vim.lsp.buf.signature_help, opts)
+
+	-- rust tools bindings
+	vim.keymap.set("n", "<leader>rsha", ":RustHoverActions<CR>", opts)
 	-- Code action groups
-	vim.keymap.set("n", "<C-CR>", ":RustCodeAction<CR>", { buffer = bufnr })
+	vim.keymap.set("n", "<C-CR>", ":RustCodeAction<CR>", opts)
 
-	vim.keymap.set("n", "<leader>rsca", ":RustCodeAction<CR>", { buffer = bufnr })
-	vim.keymap.set("n", "<leader>rspm", ":RustParentModule<CR>", { buffer = bufnr })
+	vim.keymap.set("n", "<leader>rsca", ":RustCodeAction<CR>", opts)
+	vim.keymap.set("n", "<leader>rspm", ":RustParentModule<CR>", opts)
+	vim.keymap.set("n", "<leader>rsr", ":RustRun<CR>", opts)
 
-	vim.keymap.set("n", "<leader>rsoc", ":RustOpenCargo<CR>", { buffer = bufnr })
+	vim.keymap.set("n", "<leader>rsoc", ":RustOpenCargo<CR>", opts)
 
-	vim.keymap.set("n", "<leader>rss", ":RustStartStandaloneServerForBuffer<CR>", { buffer = bufnr })
+	vim.keymap.set("n", "<leader>rss", ":RustStartStandaloneServerForBuffer<CR>", opts)
 end
 
 rust_tools.setup({

@@ -29,6 +29,8 @@ autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 -- -----
 -- config
 -- -----
+require("luasnip.loaders.from_vscode").lazy_load()
+
 cmp.setup({
 	snippet = {
 		expand = function(args)
